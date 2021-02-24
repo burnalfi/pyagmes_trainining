@@ -1,8 +1,8 @@
-from sprite import Player, Enemy, Cloud
+from sprite import Player, Enemy, Cloud, Bullet
 
 import pygame
 
-from pygame.locals import K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KEYDOWN, QUIT
+from pygame.locals import K_UP, K_DOWN, K_LEFT, K_RIGHT, K_ESCAPE, KEYDOWN, QUIT, K_SPACE
 
 pygame.init()
 
@@ -24,7 +24,9 @@ clock = pygame.time.Clock()
 
 enemies = pygame.sprite.Group()
 clouds = pygame.sprite.Group()
+# bullet = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
+
 all_sprites.add(player)
 
 while running:
@@ -33,6 +35,11 @@ while running:
             if event.key == K_ESCAPE:
                 running = False
 
+            elif event.key == K_SPACE:
+                new_bullet = Bullet()
+                bullet.add(new_bullet)
+                all_sprites.add(new_bullet)
+                                
         elif event.type == QUIT:
             running = False
 
@@ -53,6 +60,7 @@ while running:
 
     enemies.update()
     clouds.update()
+    bullet.update()    
 
     for entity in all_sprites:
         screen.blit(entity.surf, entity.rect)

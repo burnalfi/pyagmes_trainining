@@ -70,3 +70,20 @@ class Cloud(pygame.sprite.Sprite):
         self.rect.move_ip(-5, 0)
         if self.rect.right < 0:
             self.kill()
+
+class Bullet(pygame.sprite.Sprite):
+    def __init(self):
+        super(Bullet, self).__init__()
+        self.surf = pygame.Surface((5, 5))
+        self.surf.fill((194, 57, 12))
+        self.rect = self.surf.get_rect(
+            center=(
+                Player.rect.right + 1, 
+                (Player.rect.top + Player.rect.bottom) / 2
+            )
+        )
+
+    def update(self):
+        self.rect.move_ip(50, 0)
+        if self.rect.left > SCREEN_WIDTH:
+            self.kill()
